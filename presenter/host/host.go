@@ -1,0 +1,31 @@
+package host
+
+import (
+	"fmt"
+	"github.com/labstack/echo"
+	"github.com/jinzhu/gorm"
+
+	"github.com/nari-z/drunk-api/conf"
+	"github.com/nari-z/drunk-api/bundler"
+)
+
+func NewHost() {
+	e := echo.New()
+
+	var c *conf.Config = conf.NewConfig();
+	var dbConn *gorm.DB = conf.NewDBConnection(c);
+	var b *bundler.Bundler = bundler.NewBundler(dbConn);
+
+	NewRouter(e, b.Handle);
+
+	// static file.
+	// TODO: ディレクトリの設定を全体と共有したい。
+	e.Static("/LiquorImage", "LiquorImage");
+
+	var port int = 1234;
+	err := e.Start(fmt.Sprintf(":%d", port));
+	if err != nil {
+		e.Logger.Fatal(fmt.Sprintf("Failed to start: %v", err));
+	}
+}
+
