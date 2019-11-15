@@ -26,7 +26,6 @@ func (r *liquorRepository) Fetch(ctx context.Context) ([]*model.Liquor, error) {
 	err = r.DBConn.Order("id desc").Find(&liquorList).Error;
 
 	if err != nil {
-		fmt.Println("errr dayoooooooo.");
 		fmt.Println(err.Error());
 	}
 
