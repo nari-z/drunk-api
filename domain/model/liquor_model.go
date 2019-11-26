@@ -2,7 +2,7 @@ package model
 
 type Liquor struct {
 	DefaultModel
-	Name string
+	Name          string
 	ImageFilePath string
 	// Kind LiquorKind
 }

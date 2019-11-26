@@ -8,15 +8,15 @@ import (
 )
 
 type RepositoryBundler struct {
-	LiquorRepository repository.LiquorRepository
+	LiquorRepository    repository.LiquorRepository
 	ImageFileRepository repository.ImageFileRepository
 }
 
 func NewRepositoryBundler(conn *gorm.DB) *RepositoryBundler {
-	var r *RepositoryBundler = &RepositoryBundler{};
+	var r *RepositoryBundler = &RepositoryBundler{}
 
-	r.LiquorRepository = datastore.NewLiquorRepository(conn);
-	r.ImageFileRepository = datastore.NewImageFileReposiotry();
+	r.LiquorRepository = datastore.NewLiquorRepository(conn)
+	r.ImageFileRepository = datastore.NewImageFileReposiotry()
 
-	return r;
+	return r
 }

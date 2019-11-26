@@ -20,16 +20,14 @@ type Config struct {
 }
 
 func NewConfig() *Config {
-	var c *Config = &Config{};
+	var c *Config = &Config{}
 
 	// データベース設定を取得
-	c.Database.Host = os.Getenv("DRUNK_DATABASE_HOST");
-	c.Database.Port = os.Getenv("DRUNK_DATABASE_PORT");
-	c.Database.User = os.Getenv("DRUNK_DATABASE_USER");
-	c.Database.Password = os.Getenv("DRUNK_DATABASE_PASSWORD");
-	c.Database.Database = os.Getenv("DRUNK_DATABASE_NAME");
+	c.Database.Host = os.Getenv("DRUNK_DATABASE_HOST")
+	c.Database.Port = os.Getenv("DRUNK_DATABASE_PORT")
+	c.Database.User = os.Getenv("DRUNK_DATABASE_USER")
+	c.Database.Password = os.Getenv("DRUNK_DATABASE_PASSWORD")
+	c.Database.Database = os.Getenv("DRUNK_DATABASE_NAME")
 
-	return c;
+	return c
 }
-
-

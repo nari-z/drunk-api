@@ -1,8 +1,7 @@
 package model
 
 type ImageFile struct {
-	FilePath string
+	FilePath    string
 	ImageFormat string
-	Data []byte
+	Data        []byte
 }
-

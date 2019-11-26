@@ -11,4 +11,3 @@ type DefaultModel struct {
 	UpdatedAt time.Time
 	DeletedAt *time.Time `sql:"index" json:"-"`
 }
-

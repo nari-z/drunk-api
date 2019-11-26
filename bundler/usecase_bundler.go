@@ -9,8 +9,8 @@ type UseCaseBundler struct {
 }
 
 func NewUseCaseBundler(r *RepositoryBundler) *UseCaseBundler {
-	var u *UseCaseBundler = &UseCaseBundler{};
-	u.LiquorUseCase = usecase.NewLiquorUseCase(r.LiquorRepository, r.ImageFileRepository);
+	var u *UseCaseBundler = &UseCaseBundler{}
+	u.LiquorUseCase = usecase.NewLiquorUseCase(r.LiquorRepository, r.ImageFileRepository)
 
-	return u;
+	return u
 }

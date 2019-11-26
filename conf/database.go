@@ -4,12 +4,12 @@ package conf
 import (
 	"fmt"
 
-	"github.com/jinzhu/gorm"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/jinzhu/gorm"
 )
 
 func NewDBConnection(conf *Config) *gorm.DB {
-	return getMysqlConn(conf);
+	return getMysqlConn(conf)
 }
 
 func getMysqlConn(conf *Config) *gorm.DB {
