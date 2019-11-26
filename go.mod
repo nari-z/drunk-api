@@ -1,4 +1,4 @@
-module github.com/nari-z/drunk
+module github.com/nari-z/drunk-api
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
