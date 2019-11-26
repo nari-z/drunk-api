@@ -10,7 +10,7 @@ import (
 	"github.com/nari-z/drunk-api/usecase"
 )
 
-// LiquorHandler is equest handler for liquor.
+// LiquorHandler is request handler for liquor.
 type LiquorHandler interface {
 	GetLiquorList(c echo.Context) error
 	RegistLiquor(c echo.Context) error
@@ -20,7 +20,7 @@ type liquorHandler struct {
 	LiquorUseCase usecase.LiquorUseCase
 }
 
-// NewLiquorHandler return LiquorHandler
+// NewLiquorHandler return LiquorHandler。
 func NewLiquorHandler(u usecase.LiquorUseCase) LiquorHandler {
 	return &liquorHandler{u}
 }
