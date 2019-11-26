@@ -6,6 +6,7 @@ import (
 	"github.com/nari-z/drunk-api/domain/model"
 )
 
+// LiquorKindRepository is repository for liquor kind model.
 type LiquorKindRepository interface {
 	Fetch(ctx context.Context) ([]*model.LiquorKind, error)
 	Create(ctx context.Context, liquorKind *model.LiquorKind) (*model.LiquorKind, error)

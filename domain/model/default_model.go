@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-// TODO: ここにDBの知識を入れたくない
+// DefaultModel is DB default property.// TODO: ここにDBの知識を入れたくない
 type DefaultModel struct {
 	ID        uint64 `gorm:"primary_key" json:"id"`
 	CreatedAt time.Time

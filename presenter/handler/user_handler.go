@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+// UserHandler is request handler for user.
 type UserHandler interface {
 	GetUsers(c echo.Context) error
 }
@@ -14,6 +15,7 @@ type UserHandler interface {
 type userHandler struct {
 }
 
+// NewUserHandler return UserHandler.
 func NewUserHandler() UserHandler {
 	return &userHandler{}
 }

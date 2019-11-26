@@ -9,6 +9,7 @@ import (
 	"github.com/nari-z/drunk-api/conf"
 )
 
+// NewHost is create new server.
 func NewHost() {
 	e := echo.New()
 
@@ -22,7 +23,7 @@ func NewHost() {
 	// TODO: ディレクトリの設定を全体と共有したい。
 	e.Static("/LiquorImage", "LiquorImage")
 
-	var port int = 1234
+	port := 1234
 	err := e.Start(fmt.Sprintf(":%d", port))
 	if err != nil {
 		e.Logger.Fatal(fmt.Sprintf("Failed to start: %v", err))

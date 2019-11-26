@@ -9,6 +9,7 @@ import (
 	"github.com/nari-z/drunk-api/domain/repository"
 )
 
+// LiquorUseCase is usecase for liquor model.
 type LiquorUseCase interface {
 	GetLiquorList(ctx context.Context) ([]*model.Liquor, error)
 	RegistLiquor(ctx context.Context, liquorName string, liquorImage *multipart.FileHeader) (*model.Liquor, error)
@@ -22,6 +23,7 @@ type liquorUseCase struct {
 	repository.ImageFileRepository
 }
 
+// NewLiquorUseCase return LiquorUseCase.
 func NewLiquorUseCase(l repository.LiquorRepository, i repository.ImageFileRepository) LiquorUseCase {
 	return &liquorUseCase{l, i}
 }

@@ -7,6 +7,7 @@ import (
 	"github.com/nari-z/drunk-api/domain/model"
 )
 
+// ImageFileRepository is repository for image file model.
 type ImageFileRepository interface {
 	Create(ctx context.Context, fileName string, reader io.Reader) (*model.ImageFile, error)
 	Delete(ctx context.Context, filePath string) error

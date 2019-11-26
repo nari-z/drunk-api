@@ -29,6 +29,7 @@ type imageFileRepository struct {
 	imageSaveDirectoryName string
 }
 
+// NewImageFileReposiotry return repository.ImageFileRepository.
 func NewImageFileReposiotry() repository.ImageFileRepository {
 	return &imageFileRepository{"LiquorImage"}
 }
@@ -105,7 +106,8 @@ func (r *imageFileRepository) Exists(ctx context.Context, filePath string) bool 
 	return false
 }
 
-func (l *imageFileRepository) ToBase64(imageFile *model.ImageFile) (string, error) {
+// ToBase64 return BASE64 image file .
+func (r *imageFileRepository) ToBase64(imageFile *model.ImageFile) (string, error) {
 
 	img, imgFmt, err := image.Decode(bytes.NewBuffer(imageFile.Data))
 	if err != nil {
@@ -121,7 +123,7 @@ func (l *imageFileRepository) ToBase64(imageFile *model.ImageFile) (string, erro
 	case "png":
 		err = png.Encode(buffer, img)
 	default:
-		return "", errors.New("unknown image format.")
+		return "", errors.New("unknown image format")
 	}
 
 	if err != nil {
@@ -131,7 +133,7 @@ func (l *imageFileRepository) ToBase64(imageFile *model.ImageFile) (string, erro
 	return base64.StdEncoding.EncodeToString(imageFile.Data), nil
 }
 
-func (l *imageFileRepository) createImageName(fileName string) string {
-	var saveFilename string = strings.Join([]string{time.Now().Format("2006-01-02T15:04:05Z07:00"), fileName}, "_")
-	return filepath.Join(l.imageSaveDirectoryName, saveFilename)
+func (r *imageFileRepository) createImageName(fileName string) string {
+	saveFilename := strings.Join([]string{time.Now().Format("2006-01-02T15:04:05Z07:00"), fileName}, "_")
+	return filepath.Join(r.imageSaveDirectoryName, saveFilename)
 }

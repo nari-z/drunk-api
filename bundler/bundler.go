@@ -4,6 +4,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+// Bundler is all bundle.
 type Bundler struct {
 	DBConn     *gorm.DB
 	Handle     *HahdleBundler
@@ -11,8 +12,9 @@ type Bundler struct {
 	Repository *RepositoryBundler
 }
 
+// NewBundler return *Bundler.
 func NewBundler(conn *gorm.DB) *Bundler {
-	var b *Bundler = &Bundler{}
+	b := &Bundler{}
 
 	b.DBConn = conn
 	b.Repository = NewRepositoryBundler(b.DBConn)

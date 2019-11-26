@@ -7,6 +7,7 @@ import (
 	"github.com/nari-z/drunk-api/bundler"
 )
 
+// NewRouter sets routing.
 func NewRouter(e *echo.Echo, h *bundler.HahdleBundler) {
 	// CORS
 	// TODO: filter domain.

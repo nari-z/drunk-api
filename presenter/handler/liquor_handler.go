@@ -10,6 +10,7 @@ import (
 	"github.com/nari-z/drunk-api/usecase"
 )
 
+// LiquorHandler is equest handler for liquor.
 type LiquorHandler interface {
 	GetLiquorList(c echo.Context) error
 	RegistLiquor(c echo.Context) error
@@ -19,6 +20,7 @@ type liquorHandler struct {
 	LiquorUseCase usecase.LiquorUseCase
 }
 
+// NewLiquorHandler return LiquorHandler
 func NewLiquorHandler(u usecase.LiquorUseCase) LiquorHandler {
 	return &liquorHandler{u}
 }
@@ -45,9 +47,9 @@ func (h *liquorHandler) RegistLiquor(c echo.Context) error {
 		ctx = context.Background()
 	}
 
-	var upload_file *multipart.FileHeader
+	var uploadFile *multipart.FileHeader
 	var err error
-	upload_file, err = c.FormFile("image")
+	uploadFile, err = c.FormFile("image")
 	if err != nil {
 		fmt.Println("FormFile Error.")
 		return err
@@ -56,7 +58,7 @@ func (h *liquorHandler) RegistLiquor(c echo.Context) error {
 	liquorName := c.FormValue("name")
 	fmt.Println(liquorName)
 
-	liquor, err := h.LiquorUseCase.RegistLiquor(ctx, liquorName, upload_file)
+	liquor, err := h.LiquorUseCase.RegistLiquor(ctx, liquorName, uploadFile)
 	if err != nil {
 		return err
 	}

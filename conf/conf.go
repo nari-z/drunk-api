@@ -4,6 +4,7 @@ import (
 	"os"
 )
 
+// Config is application config.
 type Config struct {
 	// TODO: network setting.
 	// Server struct {
@@ -19,8 +20,9 @@ type Config struct {
 	}
 }
 
+// NewConfig return *Config.
 func NewConfig() *Config {
-	var c *Config = &Config{}
+	c := &Config{}
 
 	// データベース設定を取得
 	c.Database.Host = os.Getenv("DRUNK_DATABASE_HOST")

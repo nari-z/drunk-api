@@ -13,6 +13,7 @@ type liquorRepository struct {
 	DBConn *gorm.DB
 }
 
+// NewLiquorRepository return repository.LiquorRepository.
 func NewLiquorRepository(conn *gorm.DB) repository.LiquorRepository {
 	// MEMO: ここで毎回Migrateすると重くなる？スクリプト等で別途実施した方がよい？
 	conn.AutoMigrate(&model.Liquor{})

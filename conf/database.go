@@ -4,14 +4,17 @@ package conf
 import (
 	"fmt"
 
+	// mysql driver.
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 )
 
+// NewDBConnection return *gorm.DB.
 func NewDBConnection(conf *Config) *gorm.DB {
 	return getMysqlConn(conf)
 }
 
+// getMysqlConn return *gorm.DB.
 func getMysqlConn(conf *Config) *gorm.DB {
 	connectionString := fmt.Sprintf(
 		"%s:%s@tcp(%s:%s)/%s?parseTime=true",
