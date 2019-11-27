@@ -33,4 +33,7 @@ jobs:
     steps:
 
     - name: Test
-      run: go test ./infrastructure/datastore/
+      run: |
+        ls 
+        pwd
+        go test ./infrastructure/datastore/
