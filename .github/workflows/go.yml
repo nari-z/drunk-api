@@ -26,3 +26,11 @@ jobs:
 
     - name: Build
       run: go build -v .
+
+  test:
+    name: Test
+    runs-on: ubuntu-18.04
+    steps:
+
+    - name: Test
+      run: go test ./infrastructure/datastore/
