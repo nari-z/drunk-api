@@ -39,7 +39,5 @@ func getDBConn(conf *Config) *gorm.DB {
 	conn.DB().SetMaxIdleConns(10)
 	conn.DB().SetMaxOpenConns(20)
 
-	conn.Set("gorm:table_options", "ENGINE=InnoDB")
-
 	return conn
 }
