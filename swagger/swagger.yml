@@ -1,0 +1,39 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "drunk"
+  description: "drunk api"
+host: "localhost:8000"
+basePath: "/"
+schemes:
+  - "http"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /liquor:
+    post:
+      operationId: postLiquor
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+      responses:
+        '201':
+          description: Created
+  /liquor:
+    get:
+      operationId: getLiquor
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/User'
