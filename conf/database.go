@@ -4,28 +4,28 @@ package conf
 import (
 	"fmt"
 
-	// mysql driver.
-	_ "github.com/go-sql-driver/mysql"
+	// postgres driver.
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/jinzhu/gorm"
 )
 
 // NewDBConnection return *gorm.DB.
 func NewDBConnection(conf *Config) *gorm.DB {
-	return getMysqlConn(conf)
+	return getDBConn(conf)
 }
 
-// getMysqlConn return *gorm.DB.
-func getMysqlConn(conf *Config) *gorm.DB {
+// getDBConn return *gorm.DB.
+func getDBConn(conf *Config) *gorm.DB {
 	connectionString := fmt.Sprintf(
-		"%s:%s@tcp(%s:%s)/%s?parseTime=true",
-		conf.Database.User,
-		conf.Database.Password,
+		"host=%s port=%s user=%s dbname=%s password=%s sslmode=disable",
 		conf.Database.Host,
 		conf.Database.Port,
+		conf.Database.User,
 		conf.Database.Database,
+		conf.Database.Password,
 	)
 
-	conn, err := gorm.Open("mysql", connectionString)
+	conn, err := gorm.Open("postgres", connectionString)
 	if err != nil {
 		panic(err)
 	}
