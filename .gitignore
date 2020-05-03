@@ -2,4 +2,6 @@
 .envrc
 /LiquorImage/
 drunk
+drunk-api
 main
+generate/
