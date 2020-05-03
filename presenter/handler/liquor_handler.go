@@ -3,17 +3,21 @@ package handler
 import (
 	"context"
 	"fmt"
-	"github.com/labstack/echo"
-	"mime/multipart"
-	"net/http"
+
+	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/runtime/middleware"
 
 	"github.com/nari-z/drunk-api/usecase"
+	"github.com/nari-z/drunk-api/domain/model"
+
+	"github.com/nari-z/drunk-api/generate/models"
+	"github.com/nari-z/drunk-api/generate/restapi/operations"
 )
 
 // LiquorHandler is request handler for liquor.
 type LiquorHandler interface {
-	GetLiquorList(c echo.Context) error
-	RegistLiquor(c echo.Context) error
+	GetLiquorList(params operations.GetLiquorsParams) middleware.Responder
+	RegistLiquor(params operations.AddLiquorParams) middleware.Responder
 }
 
 type liquorHandler struct {
@@ -25,8 +29,8 @@ func NewLiquorHandler(u usecase.LiquorUseCase) LiquorHandler {
 	return &liquorHandler{u}
 }
 
-func (h *liquorHandler) GetLiquorList(c echo.Context) error {
-	ctx := c.Request().Context()
+func (h *liquorHandler) GetLiquorList(params operations.GetLiquorsParams) middleware.Responder {
+	ctx := params.HTTPRequest.Context()
 	if ctx == nil {
 		ctx = context.Background()
 	}
@@ -35,33 +39,51 @@ func (h *liquorHandler) GetLiquorList(c echo.Context) error {
 
 	liquorList, err := h.LiquorUseCase.GetLiquorList(ctx)
 	if err != nil {
-		return err
+		// TODO: send error message
+		return operations.NewAddLiquorBadRequest()
 	}
-	return c.JSON(http.StatusOK, liquorList)
+
+	// convert to response param
+	resParams := make([]*models.GetLiquorResponseParams, len(liquorList))
+	for i, liquor := range liquorList {
+		resParam := h.toGetLiquorResponseParams(liquor)
+		if resParam == nil {
+			// TODO: send error message
+			// TODO: 500 error
+			return operations.NewAddLiquorBadRequest()
+		}
+
+		resParams[i] = resParam
+	}
+
+	return operations.NewGetLiquorsOK().WithPayload(resParams)
 }
 
-func (h *liquorHandler) RegistLiquor(c echo.Context) error {
+func (h *liquorHandler) RegistLiquor(params operations.AddLiquorParams) middleware.Responder {
 	fmt.Println("In RegistLiquor.")
-	ctx := c.Request().Context()
+	ctx := params.HTTPRequest.Context()
 	if ctx == nil {
 		ctx = context.Background()
 	}
 
-	var uploadFile *multipart.FileHeader
-	var err error
-	uploadFile, err = c.FormFile("image")
+	_, err := h.LiquorUseCase.RegistLiquor(ctx, params.Body.Name, params.Body.FileName, params.Body.Image)
 	if err != nil {
-		fmt.Println("FormFile Error.")
-		return err
+		// TODO: send error message
+		return operations.NewAddLiquorBadRequest()
 	}
 
-	liquorName := c.FormValue("name")
-	fmt.Println(liquorName)
+	return operations.NewAddLiquorCreated()
+}
 
-	liquor, err := h.LiquorUseCase.RegistLiquor(ctx, liquorName, uploadFile)
-	if err != nil {
-		return err
+func (h *liquorHandler) toGetLiquorResponseParams(src *model.Liquor) *models.GetLiquorResponseParams {
+	if src == nil {
+		// TODO: nil safe
+		return nil
 	}
 
-	return c.JSON(http.StatusOK, liquor)
+	return &models.GetLiquorResponseParams {
+		ImageFilePath: src.ImageFilePath,
+		Name: src.Name,
+		UpdatedAt: strfmt.Date(src.UpdatedAt),
+	}
 }

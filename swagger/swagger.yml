@@ -35,6 +35,25 @@ paths:
       responses:
         '201':
           description: Created
+        '400':
+          description: Failed
+  /LiquorImage/{fileName}:
+    get:
+      produces:
+        - image/png
+      parameters:
+      - in: path
+        name: fileName
+        description: image file name
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: "file"
+        '400':
+          description: Failed
 definitions:
   addLiquorRequestParams:
     type: "object"
@@ -42,15 +61,15 @@ definitions:
       name:
         type: "string"
         example: "beer"
+      fileName:
+        type: "string"
+        example: "beer.png"
       image:
         type: "string"
         format: "binary"
   getLiquorResponseParams:
     type: "object"
     properties:
-      id:
-        type: "integer"
-        example: 1
       Name:
         type: "string"
         example: "beer"
