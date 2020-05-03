@@ -13,29 +13,52 @@ produces:
   - "application/json"
 paths:
   /liquor:
-    post:
-      operationId: postLiquor
-      parameters:
-      - in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/User'
-      responses:
-        '201':
-          description: Created
-  /liquor:
     get:
-      operationId: getLiquor
-      parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        type: "string"
+      operationId: getLiquors
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/User'
+            type: "array"
+            items:
+              $ref: '#/definitions/getLiquorResponseParams'
+    post:
+      operationId: addLiquor
+      consumes:
+         - multipart/form-data
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: '#/definitions/addLiquorRequestParams'
+      responses:
+        '201':
+          description: Created
 definitions:
-  
+  addLiquorRequestParams:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        example: "beer"
+      image:
+        type: "string"
+        format: "binary"
+  getLiquorResponseParams:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: 1
+      Name:
+        type: "string"
+        example: "beer"
+      ImageFilePath:
+        type: "string"
+        example: "LiquorImage/example.png"
+      UpdatedAt:
+        type: "string"
+        format: "date"
+        example: "2020-05-02T12:14:57.830568+09:00"
+        
