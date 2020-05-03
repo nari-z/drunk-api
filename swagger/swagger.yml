@@ -70,6 +70,9 @@ definitions:
   getLiquorResponseParams:
     type: "object"
     properties:
+      ID:
+        type: "string"
+        example: "0"
       Name:
         type: "string"
         example: "beer"

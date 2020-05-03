@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/runtime/middleware"
@@ -82,6 +83,7 @@ func (h *liquorHandler) toGetLiquorResponseParams(src *model.Liquor) *models.Get
 	}
 
 	return &models.GetLiquorResponseParams {
+		ID: strconv.FormatUint(src.ID, 10),// TODO: not use db id
 		ImageFilePath: src.ImageFilePath,
 		Name: src.Name,
 		UpdatedAt: strfmt.Date(src.UpdatedAt),
