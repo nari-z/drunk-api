@@ -4,4 +4,8 @@
 drunk
 drunk-api
 main
-generate/
+
+generate/*
+!generate/restapi/
+generate/restapi/*
+!generate/restapi/configure_drunk.go

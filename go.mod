@@ -17,6 +17,7 @@ require (
 	github.com/labstack/gommon v0.2.8 // indirect
 	github.com/mattn/go-colorable v0.1.1 // indirect
 	github.com/mattn/go-isatty v0.0.7 // indirect
+	github.com/rs/cors v1.7.0
 	github.com/valyala/fasttemplate v1.0.1 // indirect
 	go.mongodb.org/mongo-driver v1.3.1 // indirect
 	golang.org/x/crypto v0.0.0-20200311171314-f7b00557c8c4 // indirect
