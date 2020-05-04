@@ -31,7 +31,4 @@ func NewHost() (*restapi.Server, error) {
 	server.Port = 1234
 
 	return server, nil
-
-
-
 }
