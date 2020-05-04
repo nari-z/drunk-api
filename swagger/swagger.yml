@@ -25,7 +25,7 @@ paths:
     post:
       operationId: addLiquor
       consumes:
-         - multipart/form-data
+        - multipart/form-data
       parameters:
       - name: "body"
         in: "body"
@@ -67,6 +67,10 @@ definitions:
       image:
         type: "string"
         format: "binary"
+    required:
+      - name
+      - fileName
+      - image
   getLiquorResponseParams:
     type: "object"
     properties:

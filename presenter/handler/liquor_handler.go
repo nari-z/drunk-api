@@ -67,7 +67,7 @@ func (h *liquorHandler) RegistLiquor(params operations.AddLiquorParams) middlewa
 		ctx = context.Background()
 	}
 
-	_, err := h.LiquorUseCase.RegistLiquor(ctx, params.Body.Name, params.Body.FileName, params.Body.Image)
+	_, err := h.LiquorUseCase.RegistLiquor(ctx, *params.Body.Name, *params.Body.FileName, params.Body.Image)
 	if err != nil {
 		// TODO: send error message
 		return operations.NewAddLiquorBadRequest()
